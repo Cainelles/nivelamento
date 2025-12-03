@@ -1,15 +1,24 @@
-/* Estilo base (tema claro) */
+/* ==============================
+   ESTILO BASE (TEMA CLARO)
+============================== */
 body {
     font-family: Arial, sans-serif;
     background: #f2f2f2;
     color: #000000;
-    padding: 30px;
+    padding: 20px;
+    margin: 0;
     transition: background 0.3s, color 0.3s;
 }
 
 h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    transition: color 0.3s;
+}
+
+h2, label {
+    transition: color 0.3s;
 }
 
 .options {
@@ -17,10 +26,49 @@ h1 {
     margin-bottom: 20px;
 }
 
+select {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* ==============================
+   CONTAINER PRINCIPAL
+============================== */
+.container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: calc(100vh - 150px); /* ajusta altura total menos cabeçalho */
+    box-sizing: border-box;
+    flex-wrap: wrap; /* permite quebrar para telas menores */
+}
+
+.lado-esquerdo, .lado-direito {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-width: 300px; /* evita ficar muito pequeno */
+}
+
+/* ==============================
+   CONTAINER DE GRÁFICO
+============================== */
 .chart-container {
-    width: 80%;
-    max-width: 800px;
-    margin: 40px auto;
+    flex: 1;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centraliza verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -28,7 +76,20 @@ h1 {
     transition: background 0.3s, color 0.3s;
 }
 
-/* Tema escuro */
+/* ==============================
+   CANVAS RESPONSIVO
+============================== */
+canvas {
+    width: 100% !important;   /* ocupa toda largura disponível */
+    max-width: 100%;
+    height: auto !important;
+    aspect-ratio: 1 / 1;      /* mantém proporção quadrada */
+    display: block;
+}
+
+/* ==============================
+   TEMA ESCURO
+============================== */
 body.escuro {
     background: #121212;
     color: #ffffff;
@@ -39,64 +100,49 @@ body.escuro .chart-container {
     box-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
-/* Inputs e selects */
-select {
-    padding: 5px 10px;
-    margin-left: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-    transition: background 0.3s, color 0.3s, border 0.3s;
-}
-
 body.escuro select {
     background: #2c2c2c;
     color: #ffffff;
     border: 1px solid #555;
 }
 
-/* Labels */
-label {
-    font-weight: bold;
+/* ==============================
+   MEDIA QUERIES PARA RESPONSIVIDADE
+============================== */
+@media (max-width: 1200px) {
+    .container {
+        gap: 15px;
+        height: auto;
+    }
 }
 
-/* Suaviza transições de cores */
-h1, h2, label {
-    transition: color 0.3s;
-}
-.container {
-    display: flex;
-    gap: 20px;
-    width: 100%;
-    height: calc(120vh - 150px); /* altura total menos cabeçalho e selects */
-    box-sizing: border-box;
-}
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
 
-/* Lado esquerdo e direito divididos ao meio */
-.lado-esquerdo, .lado-direito {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    .lado-esquerdo, .lado-direito {
+        width: 100%;
+    }
+
+    .chart-container {
+        min-height: 250px;
+    }
 }
 
-/* Cada gráfico ocupa metade da altura do lado, mas canvas mantém proporção */
-.chart-container {
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* centraliza verticalmente */
-    align-items: center;     /* centraliza horizontalmente */
+@media (max-width: 500px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    select {
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .chart-container {
+        padding: 15px;
+        min-height: 200px;
+    }
 }
-
-/* Canvas responsivo com proporção fixa */
-canvas {
-    width: 90% !important;      /* ocupa 90% da largura do container */
-    max-height: 90%;            /* evita esticar verticalmente */
-    aspect-ratio: 1 / 1;        /* garante proporção quadrada */
-    display: block;
-}
-
-
-
