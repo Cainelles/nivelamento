@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>TRANSF.ESTOC</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- ChartDataLabels plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <!-- SheetJS -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Nova opção de tema -->
+    <label for="tema">Tema:</label>
+    <select id="tema">
+        <option value="claro">Claro</option>
+        <option value="escuro">Escuro</option>
+    </select>
+</div>
+
+    <h1>NIVELAMENTO T.E/UT</h1>
+    
+
+    <div class="options">
+        <label for="tipoGrafico">Tipo de gráfico:</label>
+        <select id="tipoGrafico">
+            <option value="bar">Barra</option>
+            <option value="pie">Pizza</option>
+            <option value="line">Linha</option>
+        </select>
+    </div>
+
+    <div class="container">
+    <div class="lado-esquerdo">
+        <div class="chart-container">
+            <h2>AUSETU</h2>
+            <canvas id="chartAusetu"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>MANDTU</h2>
+            <canvas id="chartMandtu"></canvas>
+        </div>
+    </div>
+    <div class="lado-direito">
+        <div class="chart-container">
+            <h2>CALDTU</h2>
+            <canvas id="chartCaldtu"></canvas>
+        </div>
+        <div class="chart-container">
+            <h2>TOTAL</h2>
+            <canvas id="chartTotal"></canvas>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Link para o JS -->
+    <script src="script.js"></script>
+
+</body>
+</html>

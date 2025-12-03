@@ -1,0 +1,102 @@
+/* Estilo base (tema claro) */
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    color: #000000;
+    padding: 30px;
+    transition: background 0.3s, color 0.3s;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.options {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    width: 80%;
+    max-width: 800px;
+    margin: 40px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Tema escuro */
+body.escuro {
+    background: #121212;
+    color: #ffffff;
+}
+
+body.escuro .chart-container {
+    background: #1e1e1e;
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+/* Inputs e selects */
+select {
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: background 0.3s, color 0.3s, border 0.3s;
+}
+
+body.escuro select {
+    background: #2c2c2c;
+    color: #ffffff;
+    border: 1px solid #555;
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+}
+
+/* Suaviza transições de cores */
+h1, h2, label {
+    transition: color 0.3s;
+}
+.container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: calc(120vh - 150px); /* altura total menos cabeçalho e selects */
+    box-sizing: border-box;
+}
+
+/* Lado esquerdo e direito divididos ao meio */
+.lado-esquerdo, .lado-direito {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Cada gráfico ocupa metade da altura do lado, mas canvas mantém proporção */
+.chart-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centraliza verticalmente */
+    align-items: center;     /* centraliza horizontalmente */
+}
+
+/* Canvas responsivo com proporção fixa */
+canvas {
+    width: 90% !important;      /* ocupa 90% da largura do container */
+    max-height: 90%;            /* evita esticar verticalmente */
+    aspect-ratio: 1 / 1;        /* garante proporção quadrada */
+    display: block;
+}
+
+
+
