@@ -68,7 +68,7 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
 
     const isEscuro = temaSelect.value === 'escuro';
 
-    const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(135, 102, 255, 0.6)"];
+    const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(255, 255, 0, 0.6)"];
     const coresEscuro = ["rgba(238, 0, 0, 0.8)", "rgba(145, 44, 238, 0.8)"];
     const backgroundColors = isEscuro ? coresEscuro : coresClaro;
     const borderColor = isEscuro ? "#ffffff" : "rgba(0,0,0,0.9)";
@@ -126,7 +126,7 @@ function atualizarTemaGrafico() {
 
         const isEscuro = temaSelect.value === 'escuro';
 
-        const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(135, 102, 255, 0.6)"];
+        const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(255, 255, 0, 0.6)"];
         const coresEscuro = ["rgba(238, 0, 0, 0.8)", "rgba(145, 44, 238, 0.8)"];
         const backgroundColors = isEscuro ? coresEscuro : coresClaro;
         const borderColor = isEscuro ? "#ffffff" : "rgba(0,0,0,0.9)";
