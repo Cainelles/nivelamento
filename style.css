@@ -46,9 +46,9 @@ label {
     display: flex;
     gap: 20px;
     width: 100%;
-    height: calc(100vh - 150px); /* ajusta altura total menos cabeçalho */
+    height: calc(100vh - 150px);
     box-sizing: border-box;
-    flex-wrap: wrap; /* permite quebrar para telas menores */
+    flex-wrap: wrap;
 }
 
 .lado-esquerdo, .lado-direito {
@@ -56,7 +56,7 @@ label {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 300px; /* evita ficar muito pequeno */
+    min-width: 300px;
 }
 
 /* ==============================
@@ -67,8 +67,8 @@ label {
     min-height: 200px;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* centraliza verticalmente */
-    align-items: center;     /* centraliza horizontalmente */
+    justify-content: center;
+    align-items: center;
     background: white;
     padding: 20px;
     border-radius: 10px;
@@ -80,10 +80,10 @@ label {
    CANVAS RESPONSIVO
 ============================== */
 canvas {
-    width: 100% !important;   /* ocupa toda largura disponível */
+    width: 100% !important;
     max-width: 100%;
     height: auto !important;
-    aspect-ratio: 1 / 1;      /* mantém proporção quadrada */
+    aspect-ratio: 1 / 1;
     display: block;
 }
 
@@ -107,7 +107,48 @@ body.escuro select {
 }
 
 /* ==============================
-   MEDIA QUERIES PARA RESPONSIVIDADE
+   BOTÃO PÁGINA INICIAL – NUBANK
+============================== */
+#btnIndex {
+    display: inline-block;
+    text-decoration: none;
+    background: #8A05BE;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.25s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#btnIndex:hover {
+    background: #6d0396;
+    transform: scale(1.05);
+}
+
+body.escuro #btnIndex {
+    background: #8A05BE;
+}
+
+/* ==============================
+   BOTÃO PÁGINA INICIAL – MOBILE
+============================== */
+@media (max-width: 600px) {
+    #btnIndex {
+        display: block;
+        width: 90%;
+        margin: 15px auto 0;
+        padding: 14px 0;
+        font-size: 16px;
+        border-radius: 35px;
+    }
+}
+
+/* ==============================
+   RESPONSIVIDADE DOS GRÁFICOS
 ============================== */
 @media (max-width: 1200px) {
     .container {

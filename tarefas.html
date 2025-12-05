@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Nivelamento de Tarefas</title>
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+
+    <!-- SheetJS -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+    <link rel="stylesheet" href="tarefas.css">
+</head>
+<body>
+
+    <h1>TAREFAS NIVELADAS T.E/UT</h1>
+
+    
+    <div class="controls">
+        <label for="tema">Tema:</label>
+        <select id="tema">
+            <option value="claro">Claro</option>
+            <option value="escuro">Escuro</option>
+        </select>
+
+
+        
+
+        <label for="abaPlanilha">Aba:</label>
+        <select id="abaPlanilha">
+            <option value="AUSETU T.E">AUSETU T.E</option>
+            <option value="AUSETU UT">AUSETU UT</option>
+            <option value="MANDTU T.E">MANDTU T.E</option>
+            <option value="MANDTU UT">MANDTU UT</option>
+            <option value="CALDTU T.E">CALDTU T.E</option>
+            <option value="CALDTU UT">CALDTU UT</option>
+        </select>
+
+        <label for="filtroOrdem">Filtrar Ordem:</label>
+        <input type="text" id="filtroOrdem" placeholder="Ex: 50000234">
+
+        <label for="filtroTexto">Filtrar Texto Breve:</label>
+        <input type="text" id="filtroTexto" placeholder="Parte do texto">
+
+        <button id="btnFiltrar">Filtrar</button>
+      <a href="index.html" id="btnIndex">Página Inicial</a>
+    </div>
+
+        <div class="tabela-container">
+            <h2>Dados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Confirmação</th>
+                        <th>Ordem</th>
+                        <th>Operação</th>
+                        <th>Sub.Op</th>
+                        <th>Centro</th>
+                        <th>Texto Breve</th>
+                        <th>Executante</th>
+                        <th>Trabalho</th>
+                        <th>Trabalho Real</th>
+                        <th>Duração</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaDados"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="tarefas.js"></script>
+</body>
+</html>

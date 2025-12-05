@@ -89,7 +89,7 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false, // ESSENCIAL para gráficos preencherem o container
+            maintainAspectRatio: false,
             plugins: {
                 legend: { 
                     display: true,
@@ -97,11 +97,14 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
                 },
                 tooltip: { enabled: true },
                 datalabels: {
-                    anchor: 'end',
-                    align: tipoGrafico === "bar" || tipoGrafico === "line" ? 'end' : 'center',
+                    anchor: tipoGrafico === "pie" ? 'center' : 'end',
+                    align: tipoGrafico === "pie" ? 'center' : 'end',
                     formatter: (value) => Math.round(value) + '%',
                     color: datalabelColor,
-                    font: { weight: 'bold', size: 14 }
+                    font: { 
+                        weight: 'bold', 
+                        size: tipoGrafico === "pie" ? 20 : 14
+                    }
                 }
             },
             scales: tipoGrafico === "pie" ? {} : { 

@@ -1,0 +1,175 @@
+/* ======================
+   ESTILO BASE (TEMA CLARO)
+====================== */
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    color: #000;
+    margin: 0;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+body.escuro {
+    background: #121212;
+    color: #fff;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* ======================
+   CONTROLS RESPONSIVOS
+====================== */
+.controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center; /* BOTÕES NÃO FICAM TORTOS NO CELULAR */
+}
+
+.controls select,
+.controls input {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+body.escuro select,
+body.escuro input {
+    background: #1e1e1e;
+    color: white;
+    border: 1px solid #666;
+}
+
+/* ======================
+   LAYOUT PRINCIPAL
+====================== */
+.container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.chart-container,
+.tabela-container {
+    flex: 1;
+    min-width: 340px;
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+body.escuro .chart-container,
+body.escuro .tabela-container {
+    background: #1f1f1f;
+    box-shadow: 0 0 10px rgba(255,255,255,0.08);
+}
+
+/* ======================
+   TABELA
+====================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    border: 1px solid #ccc;
+    padding: 6px;
+}
+
+body.escuro table th,
+body.escuro table td {
+    border-color: #555;
+}
+
+/* ======================
+   BOTÃO FILTRAR – NUBANK
+====================== */
+.controls button {
+    background: #8A05BE;      /* Roxo Nubank */
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.25s;
+}
+
+.controls button:hover {
+    background: #6d0396;
+    transform: scale(1.05);
+}
+
+body.escuro .controls button {
+    background: #8A05BE;
+}
+
+/* ======================
+   BOTÃO PÁGINA INICIAL – NUBANK
+====================== */
+#btnIndex {
+    display: inline-block;
+    text-decoration: none;
+    background: #8A05BE;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.25s ease;
+    border: none;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+#btnIndex:hover {
+    background: #6d0396;
+    transform: scale(1.07);
+}
+
+body.escuro #btnIndex {
+    background: #8A05BE;
+}
+
+/* ======================
+   BOTÕES – MODO MOBILE
+====================== */
+@media (max-width: 600px) {
+
+    .controls {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .controls select,
+    .controls input {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    .controls button {
+        width: 90%;
+        max-width: 300px;
+        padding: 14px 0;
+        border-radius: 12px;
+        font-size: 16px;
+    }
+
+    #btnIndex {
+        width: 90%;
+        max-width: 300px;
+        padding: 14px 0;
+        margin-top: 15px;
+        border-radius: 40px;
+        font-size: 16px;
+    }
+}
