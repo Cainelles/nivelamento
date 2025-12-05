@@ -53,8 +53,8 @@ function carregarAba() {
                     centro: get(sheet, "E", row),
                     texto: get(sheet, "F", row),
                     exec: get(sheet, "G", row),
-                    trab: Number(get(sheet, "H", row) || 0),
-                    trabReal: Number(get(sheet, "I", row) || 0),
+                    trab: get(sheet, "H", row) || "",
+                    trabReal: get(sheet, "I", row) || "",
                     duracao: get(sheet, "J", row)
                 });
             }
