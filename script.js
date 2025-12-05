@@ -1,64 +1,52 @@
 let chartAusetu, chartCaldtu, chartMandtu, chartTotal;
 
-// Seleção de tema
 const temaSelect = document.getElementById('tema');
+const tipoGraficoSelect = document.getElementById('tipoGrafico');
 
+// Troca de tema
 temaSelect.addEventListener('change', () => {
-    if (temaSelect.value === 'escuro') {
-        document.body.classList.add('escuro');
-    } else {
-        document.body.classList.remove('escuro');
-    }
-
-    // Atualiza os gráficos para o novo tema
+    document.body.classList.toggle("escuro", temaSelect.value === 'escuro');
     atualizarTemaGrafico();
 });
 
-// Carrega a planilha automaticamente ao abrir a página
+// Troca de tipo de gráfico
+tipoGraficoSelect.addEventListener("change", carregarPlanilhaAutomatico);
+
+// Carrega planilha e gráficos ao abrir
 window.addEventListener('load', carregarPlanilhaAutomatico);
 
-// Atualiza os gráficos quando o tipo de gráfico muda
-document.getElementById("tipoGrafico").addEventListener("change", carregarPlanilhaAutomatico);
-
 function carregarPlanilhaAutomatico() {
-    let tipoGrafico = document.getElementById("tipoGrafico").value || "bar";
+    const tipoGrafico = tipoGraficoSelect.value || "bar";
 
     fetch('planilha.xlsx')
         .then(res => res.arrayBuffer())
         .then(data => {
-            let workbook = XLSX.read(data, { type: "array" });
-            let sheet = workbook.Sheets[workbook.SheetNames[0]];
+            const workbook = XLSX.read(data, { type: "array" });
+            const sheet = workbook.Sheets[workbook.SheetNames[0]];
 
+            // Função para pegar valor e ignorar células vazias
             function getPercent(cell) {
-                let val = sheet[cell]?.v || 0;
-                val = typeof val === "number" ? val : parseFloat(val.toString().replace('%','').replace(',','.'));
-                return val * 100;
+                const val = sheet[cell]?.v;
+                if (val === undefined || val === null || val === "") return null; // ignora vazio
+                let num = typeof val === "number" ? val : parseFloat(val.toString().replace('%','').replace(',','.')) || 0;
+                return num * 100;
             }
 
-            let AUSETU = {
-                labels: ["TRANSF. ESTOC.", "UTILIDADES"],
-                valores: [getPercent("K20"), getPercent("K21")]
-            };
+            function prepararDados(cells) {
+                const valores = cells.map(getPercent).filter(v => v !== null);
+                const labels = valores.length === 2 ? ["TRANSF. ESTOC.", "UTILIDADES"] : [];
+                return { labels, valores };
+            }
 
-            let CALDTU = {
-                labels: ["TRANSF. ESTOC.", "UTILIDADES"],
-                valores: [getPercent("K31"), getPercent("K32")]
-            };
+            const AUSETU = prepararDados(["K20", "K21"]);
+            const CALDTU = prepararDados(["K31", "K32"]);
+            const MANDTU = prepararDados(["K42", "K43"]);
+            const TOTAL  = prepararDados(["K51", "K52"]);
 
-            let MANDTU = {
-                labels: ["TRANSF. ESTOC.", "UTILIDADES"],
-                valores: [getPercent("K42"), getPercent("K43")]
-            };
-
-            let TOTAL = {
-                labels: ["TRANSF. ESTOC.", "UTILIDADES"],
-                valores: [getPercent("K51"), getPercent("K52")]
-            };
-
-            gerarGrafico("chartAusetu", AUSETU, chartAusetu, (c) => chartAusetu = c, tipoGrafico);
-            gerarGrafico("chartCaldtu", CALDTU, chartCaldtu, (c) => chartCaldtu = c, tipoGrafico);
-            gerarGrafico("chartMandtu", MANDTU, chartMandtu, (c) => chartMandtu = c, tipoGrafico);
-            gerarGrafico("chartTotal", TOTAL, chartTotal, (c) => chartTotal = c, tipoGrafico);
+            gerarGrafico("chartAusetu", AUSETU, chartAusetu, c => chartAusetu = c, tipoGrafico);
+            gerarGrafico("chartCaldtu", CALDTU, chartCaldtu, c => chartCaldtu = c, tipoGrafico);
+            gerarGrafico("chartMandtu", MANDTU, chartMandtu, c => chartMandtu = c, tipoGrafico);
+            gerarGrafico("chartTotal", TOTAL, chartTotal, c => chartTotal = c, tipoGrafico);
         })
         .catch(err => console.error("Erro ao carregar a planilha:", err));
 }
@@ -67,7 +55,6 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
     if (oldChart) oldChart.destroy();
 
     const isEscuro = temaSelect.value === 'escuro';
-
     const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(255, 255, 0, 0.6)"];
     const coresEscuro = ["rgba(238, 0, 0, 0.8)", "rgba(145, 44, 238, 0.8)"];
     const backgroundColors = isEscuro ? coresEscuro : coresClaro;
@@ -89,22 +76,17 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
+            aspectRatio: 1, // mantém proporção quadrada para pizza/linha
             plugins: {
-                legend: { 
-                    display: true,
-                    labels: { color: datalabelColor }
-                },
+                legend: { display: true, labels: { color: datalabelColor } },
                 tooltip: { enabled: true },
                 datalabels: {
                     anchor: tipoGrafico === "pie" ? 'center' : 'end',
                     align: tipoGrafico === "pie" ? 'center' : 'end',
                     formatter: (value) => Math.round(value) + '%',
                     color: datalabelColor,
-                    font: { 
-                        weight: 'bold', 
-                        size: tipoGrafico === "pie" ? 20 : 14
-                    }
+                    font: { weight: 'bold', size: tipoGrafico === "pie" ? 20 : 14 }
                 }
             },
             scales: tipoGrafico === "pie" ? {} : { 
@@ -118,14 +100,12 @@ function gerarGrafico(canvasId, dados, oldChart, saveChart, tipoGrafico) {
     saveChart(new Chart(document.getElementById(canvasId), config));
 }
 
-// Atualiza gráficos existentes ao trocar de tema
 function atualizarTemaGrafico() {
     const charts = [chartAusetu, chartCaldtu, chartMandtu, chartTotal];
     charts.forEach(chart => {
         if (!chart) return;
 
         const isEscuro = temaSelect.value === 'escuro';
-
         const coresClaro = ["rgba(0, 206, 209, 0.6)", "rgba(255, 255, 0, 0.6)"];
         const coresEscuro = ["rgba(238, 0, 0, 0.8)", "rgba(145, 44, 238, 0.8)"];
         const backgroundColors = isEscuro ? coresEscuro : coresClaro;
@@ -134,7 +114,6 @@ function atualizarTemaGrafico() {
 
         chart.data.datasets[0].backgroundColor = backgroundColors;
         chart.data.datasets[0].borderColor = borderColor;
-
         chart.options.plugins.datalabels.color = datalabelColor;
         chart.options.plugins.legend.labels.color = datalabelColor;
 

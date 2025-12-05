@@ -4,9 +4,9 @@
 body {
     font-family: Arial, sans-serif;
     background: #f2f2f2;
-    color: #000000;
-    padding: 20px;
+    color: #000;
     margin: 0;
+    padding: 20px;
     transition: background 0.3s, color 0.3s;
 }
 
@@ -14,13 +14,15 @@ h1 {
     text-align: center;
     margin-bottom: 20px;
     font-size: 2rem;
-    transition: color 0.3s;
 }
 
 h2, label {
-    transition: color 0.3s;
+    margin: 0 0 10px 0;
 }
 
+/* ==============================
+   OPÇÕES E BOTÕES
+============================== */
 .options {
     text-align: center;
     margin-bottom: 20px;
@@ -28,62 +30,66 @@ h2, label {
 
 select {
     padding: 5px 10px;
-    margin-left: 10px;
+    margin: 0 10px 10px 0;
     border-radius: 5px;
     border: 1px solid #ccc;
     font-size: 14px;
-    transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
-label {
+#btnIndex {
+    text-decoration: none;
+    background: #8A05BE;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 30px;
     font-weight: bold;
+    font-size: 15px;
+    transition: 0.25s ease;
+    border: none;
+    cursor: pointer;
 }
 
-/* ==============================
-   CONTAINER PRINCIPAL
-============================== */
-.container {
+#btnIndex:hover {
+    background: #6d0396;
+    transform: scale(1.05);
+}
+
+/* Container geral dos gráficos */
+#container-graficos {
+    width: 940px;
+    margin: 0 auto;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+/* Cada linha com dois gráficos */
+.linha-graficos {
     display: flex;
+    justify-content: space-between;
     gap: 20px;
-    width: 100%;
-    height: calc(100vh - 150px);
-    box-sizing: border-box;
-    flex-wrap: wrap;
+    margin-bottom: 20px;
 }
 
-.lado-esquerdo, .lado-direito {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    min-width: 300px;
-}
-
-/* ==============================
-   CONTAINER DE GRÁFICO
-============================== */
+/* Containers individuais */
 .chart-container {
-    flex: 1;
-    min-height: 200px;
+    width: 430px;
+    height: 300px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.15);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    transition: background 0.3s, color 0.3s;
 }
 
-/* ==============================
-   CANVAS RESPONSIVO
-============================== */
+/* Canvas proporcional ao container */
 canvas {
-    width: 100% !important;
-    max-width: 100%;
-    height: auto !important;
-    aspect-ratio: 1 / 1;
+    width: 80% !important;
+    height: 80% !important;
     display: block;
 }
 
@@ -95,8 +101,13 @@ body.escuro {
     color: #ffffff;
 }
 
-body.escuro .chart-container {
+body.escuro #container-graficos {
     background: #1e1e1e;
+    box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+body.escuro .chart-container {
+    background: #2c2c2c;
     box-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
@@ -106,84 +117,6 @@ body.escuro select {
     border: 1px solid #555;
 }
 
-/* ==============================
-   BOTÃO PÁGINA INICIAL – NUBANK
-============================== */
-#btnIndex {
-    display: inline-block;
-    text-decoration: none;
-    background: #8A05BE;
-    color: white;
-    padding: 10px 22px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 15px;
-    transition: 0.25s ease;
-    border: none;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-#btnIndex:hover {
-    background: #6d0396;
-    transform: scale(1.05);
-}
-
 body.escuro #btnIndex {
     background: #8A05BE;
-}
-
-/* ==============================
-   BOTÃO PÁGINA INICIAL – MOBILE
-============================== */
-@media (max-width: 600px) {
-    #btnIndex {
-        display: block;
-        width: 90%;
-        margin: 15px auto 0;
-        padding: 14px 0;
-        font-size: 16px;
-        border-radius: 35px;
-    }
-}
-
-/* ==============================
-   RESPONSIVIDADE DOS GRÁFICOS
-============================== */
-@media (max-width: 1200px) {
-    .container {
-        gap: 15px;
-        height: auto;
-    }
-}
-
-@media (max-width: 900px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .lado-esquerdo, .lado-direito {
-        width: 100%;
-    }
-
-    .chart-container {
-        min-height: 250px;
-    }
-}
-
-@media (max-width: 500px) {
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    select {
-        margin-left: 5px;
-        font-size: 12px;
-    }
-
-    .chart-container {
-        padding: 15px;
-        min-height: 200px;
-    }
 }
